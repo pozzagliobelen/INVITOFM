@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mariela & Fabio - Invito matrimonio & cerimonia civile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #f7f1e8;
+      --card: #ffffff;
+      --accent: #c7926b;
+      --accent-soft: rgba(199,146,107,0.16);
+      --text-main: #3c3027;
+      --text-soft: #7a6c61;
+      --heart: #e28b8b;
+      --radius-card: 18px;
+      --shadow-soft: 0 12px 32px rgba(0,0,0,0.07);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: "Playfair Display", serif;
+    }
+
+    /* NAVBAR --------------------------------------------------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(12px);
+      background: rgba(247,241,232,0.94);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .navbar-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: "Dancing Script", cursive;
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links a {
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 720px) {
+      .navbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links {
+        font-size: 0.78rem;
+        row-gap: 6px;
+      }
+    }
+
+    /* CORAZONES FLOTANTES -------------------------------------- */
+    .hearts-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 22px;
+      color: var(--heart);
+      opacity: 0;
+      animation: floatUp linear forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.9);
+        opacity: 0;
+      }
+      15% { opacity: 0.97; }
+      85% { opacity: 0.97; }
+      100% {
+        transform: translateY(-130vh) translateX(40px) scale(1.1);
+        opacity: 0;
+      }
+    }
+
+    /* LAYOUT BASE ---------------------------------------------- */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 60px 18px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    /* SUBTÍTULO CEREMONIA CIVIL Y FIESTA ---------------------- */
+    .hero-subtitle-wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 26px 18px 0;
+      text-align: center;
+    }
+
+    .hero-subtitle-text {
+      font-family: "Playfair Display", serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle-line {
+      width: 150px;
+      height: 2px;
+      background: var(--accent);
+      margin: 0 auto;
+      border-radius: 999px;
+    }
+
+    /* PASE PARA UNA PERSONA (SIN USO VISUAL, DEJAMOS SOLO ESTILOS) */
+    .pass-wrapper {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .pass-icon {
+      width: 85px;
+      height: auto;
+      margin: 0 auto 10px;
+    }
+
+    .pass-icon svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .pass-title {
+      font-family: "Playfair Display", serif;
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-main);
+    }
+
+    @media (max-width: 600px) {
+      .pass-title {
+        font-size: 2rem;
+      }
+    }
+
+    /* BOTONES -------------------------------------------------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(199,146,107,0.45);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(199,146,107,0.55);
+    }
+
+    .btn-outline-dark {
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+    }
+
+    .btn-outline-dark:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* HERO – PORTADA ------------------------------------------- */
+    .hero {
+      padding: 40px 18px 10px;
+    }
+
+    .hero-full {
+      position: relative;
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto 10px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-full img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .hero-full::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.38);
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #ffffff;
+      padding: 0 20px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.7);
+      z-index: 2;
+    }
+
+    .hero-names {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-date {
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .hero-place {
+      font-size: 0.98rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero-names {
+        font-size: 2.1rem;
+      }
+      .hero-date {
+        font-size: 1rem;
+      }
+      .hero-place {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* NOSOTROS / NOI ------------------------------------------ */
+    .story-text {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 0.96rem;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+
+    .story-title {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    /* CUENTA REGRESIVA ----------------------------------------- */
+    .countdown-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .countdown-item {
+      background: var(--card);
+      border-radius: 18px;
+      padding: 14px 10px 16px;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .count-number {
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .count-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+    }
+
+    @media (max-width: 520px) {
+      .countdown-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* GALERÍA -------------------------------------------------- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      display: block;
+      border-radius: 18px;
+      object-fit: cover;
+      height: 190px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gallery-img-1 {
+      object-position: top center;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* DETALLES -------------------------------------------------- */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .detail-card {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      padding: 20px 18px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .detail-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .detail-icon-symbol {
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .detail-title {
+      font-size: 0.9rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .detail-heading {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .detail-text {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 960px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* MAPA ----------------------------------------------------- */
+    .map-card {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      padding: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 340px;
+      border: 0;
+      border-radius: 14px;
+    }
+
+    /* ASISTENCIA / CONFERMA ------------------------------------ */
+    .rsvp-card {
+      background: var(--card);
+      border-radius: var(--radius-card);
+      padding: 26px 20px 22px;
+      box-shadow: var(--shadow-soft);
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .rsvp-text {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 12px;
+    }
+
+    .rsvp-heart {
+      font-size: 1.3rem;
+      margin-bottom: 14px;
+    }
+
+    .rsvp-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .rsvp-flag {
+      margin-left: 8px;
+      font-size: 1.1rem;
+    }
+
+    /* MÚSICA --------------------------------------------------- */
+    .music-text {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 8px;
+    }
+
+    /* BOTÓN FLOTANTE DE MÚSICA -------------------------------- */
+    .music-toggle {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      background: #ffffff;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .music-toggle:hover {
+      transform: translateY(-50%) translateY(-1px);
+      box-shadow: 0 16px 34px rgba(0,0,0,0.28);
+      background: #fdf7f1;
+    }
+
+    .music-icon {
+      font-size: 1.3rem;
+    }
+
+    @media (max-width: 600px) {
+      .music-toggle {
+        padding: 10px;
+      }
+      .music-toggle span.music-label {
+        display: none;
+      }
+    }
+
+    /* FOOTER --------------------------------------------------- */
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      padding: 30px 12px 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUDIO -->
+  <audio id="bgMusic" src="musica.mp3" loop></audio>
+
+  <!-- BOTÓN FLOTANTE MÚSICA -->
+  <button class="music-toggle" id="musicToggle" aria-label="Riprodurre musica">
+    <span class="music-icon" id="musicIcon">▶️</span>
+    <span class="music-label">Musica</span>
+  </button>
+
+  <!-- CAPA DE CORAZONES -->
+  <div class="hearts-layer" id="heartsLayer"></div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand">Mariela &amp; Fabio</div>
+      <nav class="nav-links">
+        <a href="#nosotros">Noi</a>
+        <a href="#cuenta">Conto alla rovescia</a>
+        <a href="#galeria">Galleria</a>
+        <a href="#detalles">Dettagli</a>
+        <a href="#como-llegar">Come arrivare</a>
+        <a href="#asistencia">Conferma</a>
+        <a href="#musica">Musica</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO – PORTADA COMPLETA -->
+    <section class="hero" id="inicio">
+      <div class="hero-full">
+        <img src="https://i.imgur.com/EYj5SKB.jpeg" alt="Copertina Mariela e Fabio">
+        <div class="hero-overlay">
+          <h1 class="hero-names">Mariela &amp; Fabio</h1>
+          <p class="hero-date">Sabato 17 gennaio 2026</p>
+          <p class="hero-place">Tenuta “El Castillito”. Resistencia, Chaco.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBTÍTULO: CEREMONIA CIVIL Y FIESTA -->
+    <div class="hero-subtitle-wrapper">
+      <div class="hero-subtitle-text">Cerimonia civile e festa</div>
+      <div class="hero-subtitle-line"></div>
+    </div>
+
+    <!-- NOI -->
+    <section class="section" id="nosotros">
+      <div class="section-header">
+        <h2 class="section-title">La nostra storia</h2>
+        <h3 class="story-title">Un giorno speciale</h3>
+      </div>
+
+      <p class="story-text">
+        Con tanta gioia vogliamo condividere con voi un momento molto importante delle nostre vite:
+        ci sposiamo! Ci piacerebbe che ci accompagnaste in questo giorno così speciale, che sarà un
+        asado in famiglia per celebrare insieme l’amore, la famiglia e l’amicizia.
+      </p>
+    </section>
+
+    <!-- CONTO ALLA ROVESCIA -->
+    <section class="section" id="cuenta">
+      <div class="section-header">
+        <div class="kicker">Manca pochissimo</div>
+        <h2 class="section-title">Conto alla rovescia per il matrimonio</h2>
+      </div>
+
+      <div class="countdown-wrapper">
+        <div class="countdown-grid">
+          <div class="countdown-item">
+            <div class="count-number" id="days">--</div>
+            <div class="count-label">Giorni</div>
+          </div>
+          <div class="countdown-item">
+            <div class="count-number" id="hours">--</div>
+            <div class="count-label">Ore</div>
+          </div>
+          <div class="countdown-item">
+            <div class="count-number" id="minutes">--</div>
+            <div class="count-label">Minuti</div>
+          </div>
+          <div class="countdown-item">
+            <div class="count-number" id="seconds">--</div>
+            <div class="count-label">Secondi</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERIA -->
+    <section class="section" id="galeria">
+      <div class="section-header">
+        <div class="kicker">Momenti</div>
+        <h2 class="section-title">Alcune nostre foto</h2>
+        <p class="section-sub">
+          Un piccolo assaggio di tutto ciò che vogliamo continuare a costruire insieme.
+        </p>
+      </div>
+
+      <div class="gallery-grid">
+        <img class="gallery-img-1" src="https://i.imgur.com/vWerE6N.jpeg" alt="Foto 1">
+        <img src="https://i.imgur.com/4AHnxv4.jpeg" alt="Foto 2">
+        <img src="https://i.imgur.com/UxWpdX0.jpeg" alt="Foto 3">
+        <img src="https://i.imgur.com/rHdy0rn.jpeg" alt="Foto 4">
+      </div>
+    </section>
+
+    <!-- DETTAGLI DELL'EVENTO -->
+    <section class="section" id="detalles">
+      <div class="section-header">
+        <div class="kicker">Informazioni utili</div>
+        <h2 class="section-title">Dettagli dell’evento</h2>
+      </div>
+
+      <div class="cards-grid">
+        <article class="detail-card">
+          <div class="detail-icon"><span class="detail-icon-symbol">⌂</span></div>
+          <div class="detail-title">Luogo &amp; orario</div>
+          <div class="detail-heading">Data: 17 gennaio 2026</div>
+          <p class="detail-text">
+            <strong>Ora:</strong> 20:45<br>
+            <strong>Tenuta:</strong> “El Castillito” – Mutual del Banco del Chaco<br>
+            <strong>Indirizzo:</strong> RN16, KM 11.5 · Colectora Norte · Resistencia
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-icon"><span class="detail-icon-symbol">♡</span></div>
+          <div class="detail-title">Conferma</div>
+          <p class="detail-text">
+            Vi chiediamo gentilmente di confermare la vostra presenza entro il
+            <strong>25 dicembre 2025</strong>.<br><br>
+            Potete confermare inviando un messaggio WhatsApp.
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-icon"><span class="detail-icon-symbol">✧</span></div>
+          <div class="detail-title">Dress code &amp; bambini</div>
+          <p class="detail-text">
+            <strong>Codice di abbigliamento:</strong> Elegante sport.<br><br>
+            Niente bambini. Desideriamo una pista piena di adulti, calici alzati…
+          </p>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-icon"><span class="detail-icon-symbol">✿</span></div>
+          <div class="detail-title">Regali</div>
+          <p class="detail-text">
+            Non è obbligatorio, ma se desiderate farci un regalo, vi lasciamo i nostri dati
+            per aiutarci con il viaggio di nozze:<br><br>
+            <strong>Alias:</strong> BodaMarielyFabio<br>
+            <strong>CBU:</strong> 311001731100002663089
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- COME ARRIVARE -->
+    <section class="section" id="como-llegar">
+      <div class="section-header">
+        <div class="kicker">Come arrivare</div>
+        <h2 class="section-title">Posizione della tenuta</h2>
+        <p class="section-sub">
+          Tenuta “El Castillito” – Mutual del Personal del Banco del Chaco.
+        </p>
+      </div>
+
+      <div class="map-card">
+        <iframe
+          loading="lazy"
+          src="https://www.google.com/maps?q=-27.4241942,-58.9488133&hl=es&z=15&output=embed"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- CONFERMA PRESENZA -->
+    <section class="section" id="asistencia">
+      <div class="section-header">
+        <div class="kicker">Confermare la presenza</div>
+        <h2 class="section-title">Ci sarai?</h2>
+      </div>
+
+      <div class="rsvp-card">
+        <p class="rsvp-text">
+          Vi chiediamo gentilmente di confermare la vostra presenza entro il
+          <strong>25 dicembre 2025</strong>, così potremo organizzare tutto al meglio.
+        </p>
+        <p class="rsvp-text">
+          Potete conferma
