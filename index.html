@@ -191,7 +191,7 @@
       border-radius: 999px;
     }
 
-    /* PASE PARA UNA PERSONA (SIN USO VISUAL, DEJAMOS SOLO ESTILOS) */
+    /* (Estilos de pase, ya no usados en el HTML) --------------- */
     .pass-wrapper {
       text-align: center;
       margin-bottom: 32px;
@@ -334,7 +334,7 @@
       }
     }
 
-    /* NOSOTROS / NOI ------------------------------------------ */
+    /* NOI ------------------------------------------------------ */
     .story-text {
       max-width: 640px;
       margin: 0 auto;
@@ -349,7 +349,7 @@
       margin-bottom: 12px;
     }
 
-    /* CUENTA REGRESIVA ----------------------------------------- */
+    /* CONTO ALLA ROVESCIA ------------------------------------- */
     .countdown-wrapper {
       display: flex;
       flex-direction: column;
@@ -392,7 +392,7 @@
       }
     }
 
-    /* GALERÍA -------------------------------------------------- */
+    /* GALLERIA ------------------------------------------------- */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -424,7 +424,7 @@
       }
     }
 
-    /* DETALLES -------------------------------------------------- */
+    /* DETTAGLI ------------------------------------------------- */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -486,7 +486,7 @@
       }
     }
 
-    /* MAPA ----------------------------------------------------- */
+    /* MAPPA ---------------------------------------------------- */
     .map-card {
       background: var(--card);
       border-radius: var(--radius-card);
@@ -501,7 +501,7 @@
       border-radius: 14px;
     }
 
-    /* ASISTENCIA / CONFERMA ------------------------------------ */
+    /* CONFERMA ------------------------------------------------- */
     .rsvp-card {
       background: var(--card);
       border-radius: var(--radius-card);
@@ -536,7 +536,7 @@
       font-size: 1.1rem;
     }
 
-    /* MÚSICA --------------------------------------------------- */
+    /* MUSICA --------------------------------------------------- */
     .music-text {
       font-size: 0.95rem;
       color: var(--text-soft);
@@ -638,7 +638,7 @@
       </div>
     </section>
 
-    <!-- SUBTÍTULO: CEREMONIA CIVIL Y FIESTA -->
+    <!-- SUBTÍTULO: CERIMONIA E FESTA -->
     <div class="hero-subtitle-wrapper">
       <div class="hero-subtitle-text">Cerimonia civile e festa</div>
       <div class="hero-subtitle-line"></div>
@@ -788,4 +788,163 @@
           <strong>25 dicembre 2025</strong>, così potremo organizzare tutto al meglio.
         </p>
         <p class="rsvp-text">
-          Potete conferma
+          Potete confermare inviando un messaggio WhatsApp.
+        </p>
+        <div class="rsvp-heart">❤️</div>
+
+        <div class="rsvp-buttons">
+          <a
+            class="btn btn-primary"
+            href="https://wa.me/5493624890119?text=Ciao%20Mariela!%20Voglio%20confermare%20la%20mia%20presenza%20al%20matrimonio.%20💍"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Confermare con Mariela <span class="rsvp-flag">🇦🇷</span>
+          </a>
+
+          <a
+            class="btn btn-outline-dark"
+            href="https://wa.me/393517925007?text=Ciao%20Fabio!%20Voglio%20confermare%20la%20mia%20presenza%20al%20matrimonio.%20💍"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Confermare con Fabio <span class="rsvp-flag">🇮🇹</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MUSICA -->
+    <section class="section" id="musica">
+      <div class="section-header">
+        <div class="kicker">La nostra canzone</div>
+        <h2 class="section-title">Beautiful Day · U2</h2>
+      </div>
+
+      <p class="music-text">
+        La musica di sottofondo parte solo quando la attivi tu.
+        Puoi metterla in pausa o farla ripartire toccando il pulsante flottante
+        <strong>Musica</strong> che vedi sul lato destro dello schermo. 🎶💗
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Grazie per essere parte di questo giorno così speciale 💕<br />
+    Mariela &amp; Fabio
+  </footer>
+
+  <script>
+    (function () {
+      // CORAZONES FLOTANTES -----------------------------------
+      const heartsLayer = document.getElementById('heartsLayer');
+
+      function createHeart() {
+        if (!heartsLayer) return;
+        const heart = document.createElement('span');
+        heart.textContent = '❤';
+        heart.className = 'heart';
+
+        const startLeft = Math.random() * 100;
+        const duration = 7000 + Math.random() * 5000;
+
+        heart.style.left = startLeft + 'vw';
+        heart.style.bottom = '-40px';
+        heart.style.animationDuration = duration + 'ms';
+
+        heartsLayer.appendChild(heart);
+
+        setTimeout(() => {
+          if (heart.parentNode) {
+            heartsLayer.removeChild(heart);
+          }
+        }, duration + 1000);
+      }
+
+      setInterval(createHeart, 400);
+
+      // CONTO ALLA ROVESCIA -----------------------------------
+      // Formato compatibile con Safari: anno, mese (0=gennaio), giorno, ora, minuto, secondo
+      const targetDate = new Date(2026, 0, 17, 20, 45, 0).getTime();
+
+      function updateCountdown() {
+        const now = Date.now();
+        const diff = targetDate - now;
+
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+
+        if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
+
+        if (diff <= 0) {
+          daysEl.textContent = '0';
+          hoursEl.textContent = '0';
+          minutesEl.textContent = '0';
+          secondsEl.textContent = '0';
+          return;
+        }
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (3600 * 24));
+        const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        daysEl.textContent = String(days);
+        hoursEl.textContent = String(hours).padStart(2, '0');
+        minutesEl.textContent = String(minutes).padStart(2, '0');
+        secondsEl.textContent = String(seconds).padStart(2, '0');
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // MUSICA -------------------------------------------------
+      const audio = document.getElementById('bgMusic');
+      const toggleBtn = document.getElementById('musicToggle');
+      const musicIcon = document.getElementById('musicIcon');
+
+      let isPlaying = false;
+
+      document.addEventListener('DOMContentLoaded', () => {
+        if (!audio || !toggleBtn || !musicIcon) return;
+        audio.volume = 1;
+        musicIcon.textContent = '▶️';
+        toggleBtn.setAttribute('aria-label', 'Riprodurre musica');
+      });
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          if (!audio || !musicIcon) return;
+
+          if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            musicIcon.textContent = '▶️';
+            toggleBtn.setAttribute('aria-label', 'Riprodurre musica');
+          } else {
+            const playResult = audio.play();
+            if (playResult && typeof playResult.then === 'function') {
+              playResult.then(() => {
+                isPlaying = true;
+                musicIcon.textContent = '⏸️';
+                toggleBtn.setAttribute('aria-label', 'Mettere in pausa la musica');
+              }).catch(() => {
+                isPlaying = false;
+                musicIcon.textContent = '▶️';
+                toggleBtn.setAttribute('aria-label', 'Riprodurre musica');
+              });
+            } else {
+              isPlaying = true;
+              musicIcon.textContent = '⏸️';
+              toggleBtn.setAttribute('aria-label', 'Mettere in pausa la musica');
+            }
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
